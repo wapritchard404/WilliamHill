@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="11.467992">
+<testcase classname="As a customer," name="Place bet on a football match" time="11.467992">
+<system-out><![CDATA[Given I am on the William Hill website......................................passed
+And I have navigated to the euro 2016 competition section...................passed
+And I have picked a "Slovakia vs England" I wish to bet on..................passed
+When I place a "0.05" on a "Slovakia" to win................................passed
+Then I am given the odds and returns........................................passed
+]]></system-out>
+</testcase>
+</testsuite>
