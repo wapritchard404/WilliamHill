@@ -39,6 +39,7 @@ public class BrowserFactory {
 		//Capabilities for Android Emulation through ChromeDriver
 		case AndroidEmulation:
 			Map<String, String> mobileEmulation = new HashMap<String, String>();
+			//This name needs to match the emulation device within the chrome device list
 			mobileEmulation.put("deviceName", "Google Nexus 5");
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
 			chromeOptions.put("mobileEmulation", mobileEmulation);
