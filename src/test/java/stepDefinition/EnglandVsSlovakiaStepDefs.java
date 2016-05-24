@@ -28,6 +28,10 @@ public class EnglandVsSlovakiaStepDefs {
 	
 	@Given("^I have navigated to the euro competition section$")
 	public void i_have_navigated_to_the_euro_competition_section() throws Throwable {
+		
+		/* The waits look a little nasty here and I was thinking to modify the findElement to always contain a set of waits but,
+		 * I was going for fail fast, always implementing waits can cause some hanging when an element will never exist
+		 */
 		wait.until(ExpectedConditions.elementToBeClickable(WebElementIdentifiers.footballSectionNavigationButton())).click();
 		wait.until(ExpectedConditions.visibilityOf(WebElementIdentifiers.compitionsButton().get(1))).click();
 		helper.waitUntilCountChanges(WebElementIdentifiers.eurosTournamentLookup());
@@ -37,9 +41,10 @@ public class EnglandVsSlovakiaStepDefs {
 	@Given("^I have picked a \"([^\"]*)\" I wish to bet on$")
 	public void i_have_picked_a_I_wish_to_bet_on(String match) throws Throwable {
 		
-		//DEVNOTE: Show more button not returning additional odds so need to search for match
-		//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", HomePage.showMoreButton());
-		//HomePage.showMoreButton().click();
+		/* DEVNOTE: Show more button not returning additional odds so need to search for match
+		 * ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", HomePage.showMoreButton());
+		 * HomePage.showMoreButton().click();
+		 */
 		
 		WebElementIdentifiers.backButton().click();
 		helper.waitUntilCountChanges(WebElementIdentifiers.searchButtonLookup());
@@ -62,6 +67,10 @@ public class EnglandVsSlovakiaStepDefs {
 	public void i_am_given_the_odds_and_returns() throws Throwable {
 		String odds = WebElementIdentifiers.getTeamOdds(WebElementIdentifiers.teamToBetOn(team)).getAttribute("innerHTML");
 		String returns = WebElementIdentifiers.estimatedReturns().getAttribute("innerHTML");
+		/* Not sure what assert was required on these fields so went generic, probably not the best use as these fields can 
+		 * contain not the values I want and still pass the test. I wanted to stay away from a straight text match encase the odds change
+		 * Or the user decides to change the game to bet on
+		 */
 		Assert.assertNotNull(returns);
 		Assert.assertNotNull(odds);
 		WebElementIdentifiers.placeBetButton().click();
